@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  bff-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bff-api
+    ports:
+      - "8088:8088"
+    environment:
+      - ENTRA_ISSUER_URI=${ENTRA_ISSUER_URI:-https://login.microsoftonline.com/7787491b-efe4-4871-852a-79e07b048a5a/v2.0}
+      - ENTRA_API_CLIENT_ID=${ENTRA_API_CLIENT_ID:-954079da-4c93-427f-9260-62b0e83029bf}
+      - MICROSERVICE_BASE_URL=${MICROSERVICE_BASE_URL:-http://172.31.X.X:8087}
+    restart: unless-stopped
